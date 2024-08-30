@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2rro5h2xqjdp"]
+
+[ext_resource type="Texture2D" uid="uid://diprd43lh10sg" path="res://Assets/Background/background-sheet0.png" id="1_gaxgp"]
+[ext_resource type="Script" path="res://Scenes/Game/game.gd" id="1_oke83"]
+[ext_resource type="Texture2D" uid="uid://c6uxtj2o04djy" path="res://Assets/Background/cloud-sheet0.png" id="2_44vfv"]
+[ext_resource type="Texture2D" uid="uid://80j7sxplftda" path="res://Assets/Background/ground-sheet0.png" id="3_8ptwu"]
+[ext_resource type="Texture2D" uid="uid://c7mjr5b55y10x" path="res://Assets/Background/mountain-sheet0.png" id="3_w06ya"]
+[ext_resource type="PackedScene" uid="uid://bimhhnha14316" path="res://Players/Bird/bird.tscn" id="4_1hkdj"]
+[ext_resource type="AudioStream" uid="uid://bgy3iet0l0bff" path="res://Assets/Music/sfx_point.ogg" id="8_1crg4"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_oke83")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_gaxgp")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(1700, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(-6, 62)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_44vfv")
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1200, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(523, 518)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_w06ya")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(-2, 254)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_8ptwu")
+centered = false
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="Bird" parent="Player" instance=ExtResource("4_1hkdj")]
+position = Vector2(579, 322)
+
+[node name="Camera2D" type="Camera2D" parent="Player/Bird"]
+position = Vector2(151, 13)
+limit_top = 0
+limit_bottom = 640
+limit_smoothed = true
+
+[node name="Pipes" type="Node2D" parent="."]
+
+[node name="TimeForPipe" type="Timer" parent="."]
+autostart = true
+
+[node name="BirdPassesSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_1crg4")
+
+[connection signal="timeout" from="TimeForPipe" to="." method="_on_time_for_pipe_timeout"]

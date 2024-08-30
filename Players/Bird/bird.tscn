@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://bimhhnha14316"]
+
+[ext_resource type="Script" path="res://Players/Bird/bird.gd" id="1_7o11e"]
+[ext_resource type="Texture2D" uid="uid://cgudhypkusytq" path="res://Assets/Bird/Bird_spritesheet.png" id="1_hd5an"]
+[ext_resource type="AudioStream" uid="uid://c67xmgsqqj4ti" path="res://Assets/Music/mixkit-cartoon-dazzle-hit-and-birds-746.wav" id="3_wntmr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw6e2"]
+atlas = ExtResource("1_hd5an")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd3co"]
+atlas = ExtResource("1_hd5an")
+region = Rect2(1024, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t5jq"]
+atlas = ExtResource("1_hd5an")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6lgkj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iw6e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd3co")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t5jq")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 11.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_un34s"]
+radius = 45.0
+
+[node name="Bird" type="RigidBody2D"]
+script = ExtResource("1_7o11e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_6lgkj")
+animation = &"fly"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.2, 0.2)
+polygon = PackedVector2Array(24, -152, 93, -158, 253, 21, 238, 45, 73, 152, 32, 166, -23, 151, -246, 54, -243, 9)
+
+[node name="HitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(7, 3)
+shape = SubResource("CircleShape2D_un34s")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wntmr")
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

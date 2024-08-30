@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3vg8s8oqhxf6"]
+
+[ext_resource type="Texture2D" uid="uid://tui2o7f4gvcy" path="res://Assets/Background/top_pipe-sheet0.png" id="1_gm1jo"]
+[ext_resource type="Script" path="res://Objects/Pipe/pipe.gd" id="1_m4q2j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2gqug"]
+radius = 65.0
+height = 750.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ifwot"]
+a = Vector2(2, 1393)
+b = Vector2(6, -1447)
+
+[node name="Pipe" type="StaticBody2D"]
+script = ExtResource("1_m4q2j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_gm1jo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2gqug")
+
+[node name="BirdGoodZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BirdGoodZone"]
+shape = SubResource("SegmentShape2D_ifwot")
+
+[connection signal="body_entered" from="BirdGoodZone" to="." method="_on_bird_good_zone_body_entered"]
