@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2rro5h2xqjdp"]
+[gd_scene load_steps=10 format=3 uid="uid://b2rro5h2xqjdp"]
 
 [ext_resource type="Texture2D" uid="uid://diprd43lh10sg" path="res://Assets/Background/background-sheet0.png" id="1_gaxgp"]
 [ext_resource type="Script" path="res://Scenes/Game/game.gd" id="1_oke83"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://c7mjr5b55y10x" path="res://Assets/Background/mountain-sheet0.png" id="3_w06ya"]
 [ext_resource type="PackedScene" uid="uid://bimhhnha14316" path="res://Players/Bird/bird.tscn" id="4_1hkdj"]
 [ext_resource type="AudioStream" uid="uid://bgy3iet0l0bff" path="res://Assets/Music/sfx_point.ogg" id="8_1crg4"]
+[ext_resource type="LabelSettings" uid="uid://84otr0co1n03" path="res://Themes/label_settings.tres" id="8_1m24l"]
+[ext_resource type="AudioStream" uid="uid://daw57dta1eexf" path="res://Assets/Music/Maître Gims - SPIDER.mp3" id="9_db4x5"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_oke83")
@@ -68,5 +70,19 @@ autostart = true
 
 [node name="BirdPassesSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_1crg4")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="HUD"]
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 66.0
+offset_bottom = 73.0
+text = "0"
+label_settings = ExtResource("8_1m24l")
+
+[node name="BackgrondSound" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource("9_db4x5")
+autoplay = true
 
 [connection signal="timeout" from="TimeForPipe" to="." method="_on_time_for_pipe_timeout"]

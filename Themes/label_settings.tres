@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://84otr0co1n03"]
+
+[ext_resource type="FontFile" uid="uid://0h1bwnmcudiu" path="res://Assets/Font/junegull-webfont.ttf" id="1_tbn77"]
+
+[resource]
+font = ExtResource("1_tbn77")
+font_size = 64
+font_color = Color(1, 0.8, 0.00784314, 1)
+outline_size = 30

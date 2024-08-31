@@ -56,5 +56,6 @@ shape = SubResource("CircleShape2D_un34s")
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_wntmr")
+volume_db = 5.0
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
