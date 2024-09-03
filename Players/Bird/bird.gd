@@ -2,6 +2,7 @@ extends RigidBody2D
 class_name Bird
 
 signal hit
+signal dead
 
 @onready var animation = $AnimatedSprite2D
 @onready var hit_sound = $HitSound
@@ -18,15 +19,13 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if position.y > 2000:
-		_die()
-		
-func _die():
-	get_tree().change_scene_to_file("res://Scenes/Home/home.tscn")
+		dead.emit()
+
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	if not for_presentation:
 		apply_central_impulse(Vector2.RIGHT * 0.5)
-	
+
 	if Input.is_action_just_pressed("ui_accept") and can_fly:
 		apply_central_impulse(Vector2.UP * jump_force)
 
@@ -35,6 +34,8 @@ func _on_hit_area_body_entered(body: Node2D) -> void:
 		hit_sound.play()
 		can_fly = false
 		hit.emit()
+		# vibrate
+		Input.vibrate_handheld(500)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and can_fly:

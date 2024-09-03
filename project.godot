@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Home/home.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://Assets/Bird/icon-256.png"
 
+[autoload]
+
+ScoreManager="*res://Autoloads/score_manager.gd"
+
 [display]
 
 window/size/viewport_width=500
