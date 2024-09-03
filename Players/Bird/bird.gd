@@ -16,14 +16,14 @@ func _ready() -> void:
 	animation.play("fly")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if position.y > 2000:
 		_die()
 		
 func _die():
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://Scenes/Home/home.tscn")
 
-func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	if not for_presentation:
 		apply_central_impulse(Vector2.RIGHT * 0.5)
 	

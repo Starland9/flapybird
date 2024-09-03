@@ -7,9 +7,6 @@ func _ready() -> void:
 	bird_anim.play("bird_translation")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_launch_button_button_up() -> void:

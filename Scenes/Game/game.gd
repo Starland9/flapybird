@@ -13,12 +13,9 @@ var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
-	#_spawn_pipe(500, randf_range(-200, 200))
+	randomize()
+	_spawn_pipe(1200, randf_range(-200, 200))
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 	
 func _spawn_pipe(dist_x: float, dist_y: float) -> void:
 	var pipe = pipe_scene.instantiate()
@@ -30,8 +27,8 @@ func _spawn_pipe(dist_x: float, dist_y: float) -> void:
 
 
 func _on_time_for_pipe_timeout() -> void:             
-	_spawn_pipe(randf_range(300, 600), randf_range(-200, 200))
-	_spawn_pipe(randf_range(300, 600), randf_range(600, 1200))
+	_spawn_pipe(randf_range(400, 800), randf_range(-200, 200))
+	_spawn_pipe(randf_range(400, 800), randf_range(600, 1200))
 	
 func _on_pipe_bird_passed():
 	bird_passed_sound.play()
