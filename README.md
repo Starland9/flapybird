@@ -1,3 +1,3 @@
 ## Flapy Bird Game
 
-<video controls src="demo.mp4" title="Title"></video>
+<video controls src="https://github.com/Starland9/flapybird/blob/main/demo.mp4" title="Title"></video>
